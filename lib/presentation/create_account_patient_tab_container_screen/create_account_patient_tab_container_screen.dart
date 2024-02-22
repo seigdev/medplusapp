@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:medplusapp/core/app_export.dart';
 import 'package:medplusapp/presentation/create_account_patient_page/create_account_patient_page.dart';
 import 'package:medplusapp/widgets/app_bar/appbar_leading_image.dart';
 import 'package:medplusapp/widgets/app_bar/appbar_title.dart';
 import 'package:medplusapp/widgets/app_bar/custom_app_bar.dart';
+
+import '../../widgets/app_bar/appbar_subtitle.dart';
 
 class CreateAccountPatientTabContainerScreen extends StatefulWidget {
   const CreateAccountPatientTabContainerScreen({Key? key}) : super(key: key);
@@ -28,7 +31,23 @@ class CreateAccountPatientTabContainerScreenState
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: _buildAppBar(context),
+      resizeToAvoidBottomInset: false,
+      backgroundColor: appTheme.whiteA700,
+      appBar: CustomAppBar(
+
+          leadingWidth: (43),
+          leading: AppbarLeadingImage(
+
+              imagePath: ImageConstant.imgArrowLeft,
+              margin: EdgeInsets.only(left: 19, top: 15, bottom: 15),
+              onTap: () {
+                onTapArrowleftone();
+              }),
+          centerTitle: true,
+          title: AppbarSubtitle(text: "Get Started",
+          )),
+
+     // appBar: _buildAppBar(context),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(
@@ -100,5 +119,9 @@ class CreateAccountPatientTabContainerScreenState
   /// Navigates back to the previous screen.
   onTapArrowLeft(BuildContext context) {
     Navigator.pop(context);
+  }
+
+  onTapArrowleftone() {
+    Get.back();
   }
 }

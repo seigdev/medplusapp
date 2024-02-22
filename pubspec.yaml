@@ -12,6 +12,7 @@ dependencies:
   flutter_rating_bar: ^4.0.1
   flutter_svg: ^2.0.9
   fluttertoast: ^8.2.4
+  get: ^4.6.6
   grouped_list: ^5.1.2
   hooks_riverpod: ^2.4.10
   intl: ^0.18.0

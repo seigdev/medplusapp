@@ -16,13 +16,14 @@ class AppbarLeadingImage extends StatelessWidget {
 
   EdgeInsetsGeometry? margin;
 
-  Function? onTap;
+  void Function()? onTap;
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: margin ?? EdgeInsets.zero,
       child: CustomImageView(
+        onTap: onTap,
         imagePath: imagePath,
         height: 24.adaptSize,
         width: 24.adaptSize,

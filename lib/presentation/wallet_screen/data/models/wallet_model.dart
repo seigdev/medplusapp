@@ -36,9 +36,15 @@ class Wallet {
         amount: json["amount"],
         isLocked: json["isLocked"],
         user: json["user"],
-        cards: List<dynamic>.from(json["cards"].map((x) => x)),
-        createdAt: DateTime.parse(json["createdAt"]),
-        updatedAt: DateTime.parse(json["updatedAt"]),
+        cards: json["cards"] == null
+            ? []
+            : List<dynamic>.from(json["cards"]!.map((x) => x)),
+        createdAt: json["createdAt"] == null
+            ? null
+            : DateTime.parse(json["createdAt"]),
+        updatedAt: json["updatedAt"] == null
+            ? null
+            : DateTime.parse(json["updatedAt"]),
         v: json["__v"],
         walletId: json["id"],
       );
@@ -48,9 +54,9 @@ class Wallet {
         "amount": amount,
         "isLocked": isLocked,
         "user": user,
-        "cards": List<dynamic>.from(cards!.map((x) => x)),
-        "createdAt": createdAt!.toIso8601String(),
-        "updatedAt": updatedAt!.toIso8601String(),
+        "cards": cards == null ? [] : List<dynamic>.from(cards!.map((x) => x)),
+        "createdAt": createdAt?.toIso8601String(),
+        "updatedAt": updatedAt?.toIso8601String(),
         "__v": v,
         "id": walletId,
       };

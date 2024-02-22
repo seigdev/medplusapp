@@ -2,6 +2,7 @@ import 'package:country_pickers/country.dart';
 import 'package:country_pickers/country_pickers.dart';
 import 'package:flutter/material.dart';
 import 'package:medplusapp/core/app_export.dart';
+import 'package:medplusapp/presentation/sign_in_screen/sign_in_screen.dart';
 import 'package:medplusapp/widgets/custom_elevated_button.dart';
 import 'package:medplusapp/widgets/custom_phone_number.dart';
 import 'package:medplusapp/widgets/custom_text_form_field.dart';
@@ -131,16 +132,48 @@ class CreateAccountPatientPageState extends State<CreateAccountPatientPage>
                           SizedBox(height: 86.v),
                           _buildCreateAccount(context),
                           SizedBox(height: 21.v),
-                          RichText(
-                              text: TextSpan(children: [
-                                TextSpan(
-                                    text: "Have an account? ",
-                                    style: CustomTextStyles.bodyMediumff2b2a29),
-                                TextSpan(
-                                    text: "Sign In",
-                                    style: CustomTextStyles.bodyMediumffd12b2f)
-                              ]),
-                              textAlign: TextAlign.left)
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              RichText(
+                                  text: TextSpan(children: [
+                                    TextSpan(
+                                        text: "Have an account? ",
+                                        style: CustomTextStyles.bodyMediumff2b2a29),
+
+                                  ]),
+                                  textAlign: TextAlign.left),
+                              GestureDetector(
+                                onTap: (){
+                                  Navigator.push(context, MaterialPageRoute(builder: (context) => SignInScreen() ));
+                                },
+                                child: Text(
+                                    "Sign In",
+                                    style: CustomTextStyles.bodyMediumffd12b2f
+                                ),
+                              ),
+
+                            ],
+
+                          ),
+                          // RichText(
+                          //     text: TextSpan(children: [
+                          //       TextSpan(
+                          //           text: "Have an account? ",
+                          //           style: CustomTextStyles.bodyMediumff2b2a29),
+                          //       TextSpan(
+                          //           text: "Sign In",
+                          //           style: CustomTextStyles.bodyMediumffd12b2f)
+                          //     ]),
+                          //     textAlign: TextAlign.left),
+                          // GestureDetector(
+                          //   onTap: (){
+                          //     Navigator.push(context, MaterialPageRoute(builder: (context) => SignInScreen() ));
+                          //   },
+                          //   child: Text(
+                          //       "Sign In",
+                          //       style: CustomTextStyles.bodyMediumffd12b2f, fontSize= 10,) ,
+                          // ),
                         ],
                       ),
                     )

@@ -1,6 +1,7 @@
 // ignore_for_file: must_be_immutable
 
-import 'package:medplusapp/widgets/custom_drawer.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:medplusapp/presentation/side_navigation_draweritem/side_navigation_draweritem.dart';
 
 import '../dashboard_screen/widgets/ninetynine_item_widget.dart';
 import '../dashboard_screen/widgets/userprofilelist_item_widget.dart';
@@ -11,77 +12,99 @@ import 'package:medplusapp/widgets/app_bar/appbar_subtitle_three.dart';
 import 'package:medplusapp/widgets/app_bar/appbar_trailing_iconbutton.dart';
 import 'package:medplusapp/widgets/app_bar/appbar_trailing_iconbutton_one.dart';
 import 'package:medplusapp/widgets/app_bar/custom_app_bar.dart';
+
 import 'package:medplusapp/widgets/custom_search_view.dart';
+import 'dart:core';
 
-class DashboardScreen extends StatelessWidget {
-  DashboardScreen({Key? key}) : super(key: key);
+import '../wallet_screen/provider/wallet_provider.dart';
 
+class DashboardScreen extends ConsumerStatefulWidget {
+  const DashboardScreen({super.key});
+
+  @override
+  ConsumerState<ConsumerStatefulWidget> createState() =>
+      _DashboardScreenState();
+}
+
+class _DashboardScreenState extends ConsumerState<DashboardScreen> {
   TextEditingController searchController = TextEditingController();
+
+  GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   Widget build(BuildContext context) {
+    ref.watch(getwalletProvider);
     return Scaffold(
+      key: _scaffoldKey,
+      resizeToAvoidBottomInset: false,
+      backgroundColor: appTheme.whiteA700,
+      drawer: SideNavigationDraweritem(),
       appBar: _buildAppBar(context),
-      drawer: drawerlist(context),
       body: SafeArea(
-        child: SingleChildScrollView(
-          padding: EdgeInsets.only(top: 6.v),
-          child: Padding(
-            padding: EdgeInsets.only(bottom: 5.v),
-            child: Column(
-              children: [
-                Align(
-                  alignment: Alignment.centerLeft,
-                  child: Padding(
-                    padding: EdgeInsets.only(left: 19.h),
-                    child: Text(
-                      "Good morning, Stella",
-                      style: CustomTextStyles.headlineSmallSemiBold,
+        child: SizedBox(
+          width: SizeUtils.width,
+          child: SingleChildScrollView(
+            padding: EdgeInsets.only(top: 6.v),
+            keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
+            child: Padding(
+              padding: EdgeInsets.only(left: 19, bottom: 7.v),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Align(
+                    alignment: Alignment.centerLeft,
+                    child: Padding(
+                      padding: EdgeInsets.only(left: 19.h),
+                      child: Text(
+                        "Good morning, Stella",
+                        style: CustomTextStyles.headlineSmallSemiBold,
+                      ),
                     ),
                   ),
-                ),
-                SizedBox(height: 29.v),
-                Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 19.h),
-                  child: CustomSearchView(
-                    controller: searchController,
-                    hintText: "Search",
-                    borderDecoration: SearchViewStyleHelper.fillGray,
-                    filled: true,
-                    fillColor: appTheme.gray10001,
-                  ),
-                ),
-                SizedBox(height: 30.v),
-                _buildNinetyNine(context),
-                SizedBox(height: 30.v),
-                _buildFrameStack(context),
-                SizedBox(height: 31.v),
-                Align(
-                  alignment: Alignment.centerLeft,
-                  child: Padding(
-                    padding: EdgeInsets.only(left: 19.h),
-                    child: Text(
-                      "Upcoming Appointment",
-                      style: CustomTextStyles.titleMedium18,
+                  SizedBox(height: 29.v),
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 19.h),
+                    child: CustomSearchView(
+                      controller: searchController,
+                      hintText: "Search",
+                      borderDecoration: SearchViewStyleHelper.fillGray,
+                      filled: true,
+                      fillColor: appTheme.gray10001,
                     ),
                   ),
-                ),
-                SizedBox(height: 19.v),
-                _buildTimeRow(context),
-                SizedBox(height: 29.v),
-                Align(
-                  alignment: Alignment.centerLeft,
-                  child: Padding(
-                    padding: EdgeInsets.only(left: 19.h),
-                    child: Text(
-                      "Current Medications",
-                      style: CustomTextStyles.titleMedium18,
+                  SizedBox(height: 30.v),
+                  _buildNinetyNine(context),
+                  SizedBox(height: 30.v),
+                  _buildFrameStack(context),
+                  SizedBox(height: 31.v),
+                  Align(
+                    alignment: Alignment.centerLeft,
+                    child: Padding(
+                      padding: EdgeInsets.only(left: 19.h),
+                      child: Text(
+                        "Upcoming Appointment",
+                        style: CustomTextStyles.titleMedium18,
+                      ),
                     ),
                   ),
-                ),
-                SizedBox(height: 21.v),
-                _buildUserProfileList(context),
-              ],
+                  SizedBox(height: 19.v),
+                  _buildTimeRow(context),
+                  SizedBox(height: 29.v),
+                  Align(
+                    alignment: Alignment.centerLeft,
+                    child: Padding(
+                      padding: EdgeInsets.only(left: 19.h),
+                      child: Text(
+                        "Current Medications",
+                        style: CustomTextStyles.titleMedium18,
+                      ),
+                    ),
+                  ),
+                  SizedBox(height: 21.v),
+                  _buildUserProfileList(context),
+                ],
+              ),
             ),
           ),
         ),
@@ -96,6 +119,9 @@ class DashboardScreen extends StatelessWidget {
       leadingWidth: 43.h,
       leading: AppbarLeadingImage(
         imagePath: ImageConstant.imgGgMenuLeft,
+        onTap: () {
+          drawer(context);
+        },
         margin: EdgeInsets.only(
           left: 19.h,
           top: 15.v,
@@ -318,5 +344,24 @@ class DashboardScreen extends StatelessWidget {
         },
       ),
     );
+  }
+
+  onTapMenuoneone() {
+    _scaffoldKey.currentState?.openDrawer();
+  }
+
+  onTapNotific() {
+    _scaffoldKey.currentState?.openDrawer();
+  }
+
+  /// Opens the drawer of the current scaffold using the [_route to cart page] instance
+  /// variable.
+  onTapCart() {
+    //Get.toNamed(
+    // AppRoutes.cartScreen,
+    //  );
+  }
+  drawer(BuildContext) {
+    _scaffoldKey.currentState?.openDrawer();
   }
 }

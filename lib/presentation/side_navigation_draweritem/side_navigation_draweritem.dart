@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:medplusapp/core/app_export.dart';
+import 'package:medplusapp/presentation/account_settings_screen/account_settings_screen.dart';
+import 'package:medplusapp/presentation/book_appointment_now_screen/book_appointment_now_screen.dart';
+import 'package:medplusapp/presentation/book_lab_test_screen/book_lab_test_screen.dart';
+import 'package:medplusapp/presentation/dashboard_screen/dashboard_screen.dart';
+import 'package:medplusapp/presentation/help_center_screen/help_center_screen.dart';
+import 'package:medplusapp/presentation/scw_community_screen/scw_community_screen.dart';
 
-import '../../widgets/custom_elevated_button.dart';
+import '../consultations_one_screen/consultations_one_screen.dart';
 
-// ignore_for_file: must_be_immutable
 class SideNavigationDraweritem extends StatelessWidget {
-  const SideNavigationDraweritem({Key? key})
-      : super(
-          key: key,
-        );
+  const SideNavigationDraweritem({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -49,7 +51,7 @@ class SideNavigationDraweritem extends StatelessWidget {
               child: Row(
                 children: [
                   CustomImageView(
-                    imagePath: ImageConstant.imgHomeSvgrepoCom,
+                    // imagePath: ImageConstant.imgHomeSvgrepoCom,
                     height: 24.adaptSize,
                     width: 24.adaptSize,
                   ),
@@ -59,9 +61,17 @@ class SideNavigationDraweritem extends StatelessWidget {
                       top: 3.v,
                       bottom: 3.v,
                     ),
-                    child: Text(
-                      "Home",
-                      style: theme.textTheme.bodyMedium,
+                    child: GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => DashboardScreen()));
+                      },
+                      child: Text(
+                        "Home",
+                        style: theme.textTheme.bodyMedium,
+                      ),
                     ),
                   ),
                 ],
@@ -73,7 +83,7 @@ class SideNavigationDraweritem extends StatelessWidget {
               child: Row(
                 children: [
                   CustomImageView(
-                    imagePath: ImageConstant.imgCalendarSvgrepoCom,
+                    // imagePath: ImageConstant.imgCalendarSvgrepoCom,
                     height: 24.adaptSize,
                     width: 24.adaptSize,
                   ),
@@ -83,9 +93,55 @@ class SideNavigationDraweritem extends StatelessWidget {
                       top: 4.v,
                       bottom: 2.v,
                     ),
-                    child: Text(
-                      "Appointments",
-                      style: theme.textTheme.bodyMedium,
+                    child: GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                    BookAppointmentNowScreen()));
+                      },
+                      child: Text(
+                        "Appointments",
+                        style: theme.textTheme.bodyMedium,
+                      ),
+                    ),
+                    // child: Text(
+                    //   "Appointments",
+                    //   style: theme.textTheme.bodyMedium,
+                    // ),
+                  ),
+                ],
+              ),
+            ),
+            SizedBox(height: 30.v),
+            Padding(
+              padding: EdgeInsets.only(left: 10.h),
+              child: Row(
+                children: [
+                  CustomImageView(
+                    // imagePath: ImageConstant.imgMedicalHistory,
+                    height: 24.adaptSize,
+                    width: 24.adaptSize,
+                  ),
+                  Padding(
+                    padding: EdgeInsets.only(
+                      left: 13.h,
+                      top: 3.v,
+                      bottom: 3.v,
+                    ),
+                    child: GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                    ConsultationsOneScreen()));
+                      },
+                      child: Text(
+                        "Consultations",
+                        style: theme.textTheme.bodyMedium,
+                      ),
                     ),
                   ),
                 ],
@@ -97,7 +153,7 @@ class SideNavigationDraweritem extends StatelessWidget {
               child: Row(
                 children: [
                   CustomImageView(
-                    imagePath: ImageConstant.imgMedicalHistory,
+                    // imagePath: ImageConstant.imgPillsSvgrepoCom,
                     height: 24.adaptSize,
                     width: 24.adaptSize,
                   ),
@@ -107,30 +163,31 @@ class SideNavigationDraweritem extends StatelessWidget {
                       top: 3.v,
                       bottom: 3.v,
                     ),
-                    child: Text(
-                      "Consultations",
-                      style: theme.textTheme.bodyMedium,
+                    child: GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                    ConsultationsOneScreen()));
+                      },
+                      child: Text(
+                        "Medications",
+                        style: theme.textTheme.bodyMedium,
+                      ),
                     ),
                   ),
                 ],
               ),
             ),
-            SizedBox(height: 30.v),
-            Padding(
-              padding: EdgeInsets.only(left: 10.h),
-              child: _buildHelpCenter(
-                context,
-                image: ImageConstant.imgPillsSvgrepoCom,
-                text: "Medications",
-              ),
-            ),
+
             SizedBox(height: 30.v),
             Padding(
               padding: EdgeInsets.only(left: 10.h),
               child: Row(
                 children: [
                   CustomImageView(
-                    imagePath: ImageConstant.imgLabSvgrepoCom,
+                    // imagePath: ImageConstant.imgLabSvgrepoCom,
                     height: 24.adaptSize,
                     width: 24.adaptSize,
                   ),
@@ -140,9 +197,17 @@ class SideNavigationDraweritem extends StatelessWidget {
                       top: 3.v,
                       bottom: 3.v,
                     ),
-                    child: Text(
-                      "Lab Tests",
-                      style: theme.textTheme.bodyMedium,
+                    child: GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => BookLabTestScreen()));
+                      },
+                      child: Text(
+                        "Lab Tests",
+                        style: theme.textTheme.bodyMedium,
+                      ),
                     ),
                   ),
                 ],
@@ -156,7 +221,7 @@ class SideNavigationDraweritem extends StatelessWidget {
               child: Row(
                 children: [
                   CustomImageView(
-                    imagePath: ImageConstant.imgPharmacySvgrepoCom,
+                    // imagePath: ImageConstant.imgPharmacySvgrepoCom,
                     height: 24.adaptSize,
                     width: 24.adaptSize,
                   ),
@@ -180,7 +245,7 @@ class SideNavigationDraweritem extends StatelessWidget {
               child: Row(
                 children: [
                   CustomImageView(
-                    imagePath: ImageConstant.imgGroupPeopleSvgrepoCom,
+                    // imagePath: ImageConstant.imgGroupPeopleSvgrepoCom,
                     height: 24.adaptSize,
                     width: 24.adaptSize,
                   ),
@@ -189,36 +254,106 @@ class SideNavigationDraweritem extends StatelessWidget {
                       left: 13.h,
                       top: 5.v,
                     ),
-                    child: Text(
-                      "SCW Community",
-                      style: theme.textTheme.bodyMedium,
+                    child: GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => ScwCommunityScreen()));
+                      },
+                      child: Text(
+                        "SCW Community",
+                        style: theme.textTheme.bodyMedium,
+                      ),
                     ),
                   ),
                 ],
               ),
             ),
             SizedBox(height: 15.v),
-            CustomElevatedButton(
-              text: "Account Settings",
-              margin: EdgeInsets.only(right: 7.h),
-              leftIcon: Container(
-                margin: EdgeInsets.only(right: 13.h),
-                child: CustomImageView(
-                  imagePath: ImageConstant.imgCarbonsettings,
-                  height: 24.adaptSize,
-                  width: 24.adaptSize,
-                ),
-              ),
-            ),
-            SizedBox(height: 15.v),
+
             Padding(
               padding: EdgeInsets.only(left: 10.h),
-              child: _buildHelpCenter(
-                context,
-                image: ImageConstant.imgFluentChatHelp20Regular,
-                text: "Help Center",
+              child: Row(
+                children: [
+                  CustomImageView(
+                    // imagePath: ImageConstant.imgCarbonsettings,
+                    height: 24.adaptSize,
+                    width: 24.adaptSize,
+                  ),
+                  Padding(
+                    padding: EdgeInsets.only(
+                      left: 13.h,
+                      top: 5.v,
+                    ),
+                    child: GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => AccountSettingsScreen()));
+                      },
+                      child: Text(
+                        "Account Settings",
+                        style: theme.textTheme.bodyMedium,
+                      ),
+                    ),
+                  ),
+                ],
               ),
             ),
+            // CustomElevatedButton(
+            //   text: "Account Settings",
+            //   margin: EdgeInsets.only(right: 7.h),
+            //   leftIcon: Container(
+            //     margin: EdgeInsets.only(right: 13.h),
+            //     child: CustomImageView(
+            //       imagePath: ImageConstant.imgCarbonsettings,
+            //       height: 24.adaptSize,
+            //       width: 24.adaptSize,
+            //     ),
+            //   ),
+            // ),
+            SizedBox(height: 15.v),
+
+            Padding(
+              padding: EdgeInsets.only(left: 10.h),
+              child: Row(
+                children: [
+                  CustomImageView(
+                    // imagePath: ImageConstant.imgFluentChatHelp20Regular,
+                    height: 24.adaptSize,
+                    width: 24.adaptSize,
+                  ),
+                  Padding(
+                    padding: EdgeInsets.only(
+                      left: 13.h,
+                      top: 5.v,
+                    ),
+                    child: GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => HelpCenterScreen()));
+                      },
+                      child: Text(
+                        "Help Center",
+                        style: theme.textTheme.bodyMedium,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            // Padding(
+            //   padding: EdgeInsets.only(left: 10.h),
+            //   child: _buildHelpCenter(
+            //     context,
+            //     image: ImageConstant.imgFluentChatHelp20Regular,
+            //     text: "Help Center",
+            //   ),
+            // ),
             SizedBox(height: 15.v),
           ],
         ),

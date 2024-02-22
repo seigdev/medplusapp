@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:medplusapp/core/app_export.dart';
-import 'package:medplusapp/presentation/wallet_screen/provider/wallet_provider.dart';
 import 'package:medplusapp/widgets/custom_elevated_button.dart';
 
 class OnboardingScreen extends ConsumerWidget {
@@ -9,7 +8,6 @@ class OnboardingScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    ref.watch(getwalletProvider); // TODO: CHANGE POSITION TO DASHBOARDSCREEN
     return Scaffold(
       extendBody: true,
       extendBodyBehindAppBar: true,
@@ -78,6 +76,6 @@ class OnboardingScreen extends ConsumerWidget {
 
   /// Navigates to the createAccountPatientTabContainerScreen when the action is triggered.
   onTapGetStarted(BuildContext context, WidgetRef ref) {
-    Navigator.pushNamed(context, AppRoutes.bookAppointmentNowScreen);
+    Navigator.pushNamed(context, AppRoutes.signInScreen);
   }
 }
